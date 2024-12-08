@@ -70,12 +70,17 @@ dependencies {
 
 //    Hilt
     implementation(libs.hilt.android)
+    implementation(project(":feature:home"))
     kapt(libs.hilt.android.compiler)
 
 //    Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     implementation(libs.google.firebase.firestore.ktx)
+
+    //    Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
 //    Testing
     testImplementation(libs.junit)

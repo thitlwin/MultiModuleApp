@@ -22,12 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-//    @Inject
-//    lateinit var composeNavigator: ComposeNavigator
-//    private val sharedViewModel: SharedViewModel by viewModels()
-//    @Inject
-//    lateinit var destroyMediaControllerUseCase: DestroyMediaControllerUseCase
-
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,27 +56,6 @@ class MainActivity : ComponentActivity() {
                 NavGraph(navController = navController)
             }
 
-//            LaunchedEffect(Unit) {
-//                composeNavigator.handleNavigationCommands(navController)
-//            }
-//            YawKiTheme {
-//                NavHost(
-//                    navController = navController,
-//                    startDestination = YawKiRoute.Dashboard.name
-//                ) {
-//                    dashboardNavigation(
-//                        sharedViewModel = sharedViewModel,
-//                        composeNavigator = composeNavigator
-//                    )
-//                }
-//            }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        sharedViewModel.destroyMediaController()
-//        destroyMediaControllerUseCase.invoke()
-//        stopService(Intent(this, YawKiPlayerService::class.java))
     }
 }

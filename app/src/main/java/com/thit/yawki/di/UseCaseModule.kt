@@ -5,6 +5,11 @@ import com.thit.domain.repository.UserRepository
 import com.thit.domain.usecase.GetUserProfileImageUseCase
 import com.thit.domain.usecase.GetUserUseCase
 import com.thit.domain.usecase.UseCases
+import com.thit.home.domain.repository.MovieRepository
+import com.thit.home.domain.usecase.GetNowPlayingMovieUseCase
+import com.thit.home.domain.usecase.GetPopularMovieUseCase
+import com.thit.home.domain.usecase.GetTopRatedMovieUseCase
+import com.thit.home.domain.usecase.HomeUseCases
 import com.thit.signup.domain.repository.SignUpAuthenticationRepository
 import com.thit.signup.domain.repository.FirebaseStorageRepository
 import com.thit.signup.domain.usecase.SignUpUseCases
@@ -56,24 +61,24 @@ object UseCaseModule {
         )
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideHomeUseCases(
-//        movieRepository: MovieRepository,
-//    ): HomeUseCases {
-//        return HomeUseCases(
-//            getNowPlayingMovieUseCase = GetNowPlayingMovieUseCase(
-//                movieRepository = movieRepository
-//            ),
-//            getPopularMovieUseCase = GetPopularMovieUseCase(
-//                movieRepository = movieRepository
-//            ),
-//            getTopRatedMovieUseCase = GetTopRatedMovieUseCase(
-//                movieRepository = movieRepository
-//            )
-//        )
-//    }
-//
+    @Provides
+    @Singleton
+    fun provideHomeUseCases(
+        movieRepository: MovieRepository,
+    ): HomeUseCases {
+        return HomeUseCases(
+            getNowPlayingMovieUseCase = GetNowPlayingMovieUseCase(
+                movieRepository = movieRepository
+            ),
+            getPopularMovieUseCase = GetPopularMovieUseCase(
+                movieRepository = movieRepository
+            ),
+            getTopRatedMovieUseCase = GetTopRatedMovieUseCase(
+                movieRepository = movieRepository
+            )
+        )
+    }
+
 //    @Provides
 //    @Singleton
 //    fun provideDetailUseCases(

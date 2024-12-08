@@ -7,4 +7,6 @@ object Constants {
     const val DATASTORE_PREFERENCES_NAME: String = "DATASTORE_PREFERENCES_NAME"
     const val USER_COLLECTION = "Users"
     const val IMAGE_COLLECTION = "Images"
+    const val API_KEY = "473e19a8e89e2a752bafff329cfcb648"
+    const val LANGUAGE = "english"
 }

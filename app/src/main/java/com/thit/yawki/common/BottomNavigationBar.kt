@@ -20,6 +20,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -61,6 +64,11 @@ fun BottomNavigationBar(
             Screen.SettingScreen.route,
             Icons.Default.Settings
         ),
+        BottomNavItem(
+            "Profile",
+            Screen.ProfileScreen.route,
+            Icons.Default.Person
+        )
     )
     BottomNavigation(
         backgroundColor = MaterialTheme.colorScheme.secondary,

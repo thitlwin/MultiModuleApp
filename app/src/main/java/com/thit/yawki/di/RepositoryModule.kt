@@ -4,7 +4,12 @@ import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.thit.data.repository.DataStoreRepositoryImpl
+import com.thit.data.repository.UserRepositoryImpl
 import com.thit.domain.repository.DataStoreRepository
+import com.thit.domain.repository.UserRepository
+import com.thit.home.data.remote.ApiService
+import com.thit.home.data.repository.MovieRepositoryImpl
+import com.thit.home.domain.repository.MovieRepository
 import com.thit.signin.domain.repository.AuthenticationRepository
 import com.thit.signin.repository.AuthenticationRepositoryImpl
 import com.thit.signup.domain.repository.FirebaseStorageRepository
@@ -70,12 +75,12 @@ object RepositoryModule {
 //        )
 //    }
 //
-//    @Provides
-//    @Singleton
-//    fun provideMovieRepository(apiService: com.kursatkumsuz.home.data.remote.ApiService): com.kursatkumsuz.home.domain.repository.MovieRepository {
-//        return com.kursatkumsuz.home.data.repository.MovieRepositoryImpl(apiService = apiService)
-//    }
-//
+    @Provides
+    @Singleton
+    fun provideMovieRepository(apiService: ApiService): MovieRepository {
+        return MovieRepositoryImpl(apiService = apiService)
+    }
+
 //    @Provides
 //    @Singleton
 //    fun provideWatchListRepository(
@@ -109,19 +114,19 @@ object RepositoryModule {
             firebaseFirestore = firebaseFirestore,
         )
     }
-//
-//    @Provides
-//    @Singleton
-//    fun provideUserRepository(
-//        firebaseFirestore: FirebaseFirestore,
-//        firebaseAuth: FirebaseAuth
-//    ): UserRepository {
-//        return UserRepositoryImpl(
-//            firebaseFirestore = firebaseFirestore,
-//            firebaseAuth = firebaseAuth
-//        )
-//    }
-//
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(
+        firebaseFirestore: FirebaseFirestore,
+        firebaseAuth: FirebaseAuth
+    ): UserRepository {
+        return UserRepositoryImpl(
+            firebaseFirestore = firebaseFirestore,
+            firebaseAuth = firebaseAuth
+        )
+    }
+
 //    @Provides
 //    @Singleton
 //    fun provideFirebaseRepository(
