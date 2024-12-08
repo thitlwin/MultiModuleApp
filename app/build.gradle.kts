@@ -2,18 +2,22 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+//    Hilt
+    alias(libs.plugins.hilt.android.gradle)
+    kotlin("kapt")
+    alias(libs.plugins.google.services)
 }
 
 android {
     namespace = "com.thit.yawki"
-    compileSdk = 35
+    compileSdk = ProjectProperties.COMPILE_SDK
 
     defaultConfig {
         applicationId = "com.thit.yawki"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = ProjectProperties.MIN_SDK
+        targetSdk = ProjectProperties.TARGET_SDK
+        versionCode = ProjectProperties.VERSION_CODE
+        versionName = ProjectProperties.VERSION_NAME
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,7 +44,15 @@ android {
 }
 
 dependencies {
+// Features
+    implementation(project(":core:util"))
+    implementation(project(":core:domain"))
+    implementation(project(":data"))
+    implementation(project(":feature:splash"))
+    implementation(project(":feature:onboarding"))
+    implementation(project(":feature:auth"))
 
+//    Compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -49,6 +61,21 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.material)
+
+//    Navigation
+    implementation(libs.androidx.navigation.compose)
+
+//    Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+
+//    Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.google.firebase.firestore.ktx)
+
+//    Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -56,4 +83,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

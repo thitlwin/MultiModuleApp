@@ -1,47 +1,88 @@
 package com.thit.yawki
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.thit.yawki.ui.theme.YawKiTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.thit.util.Screen
+import com.thit.yawki.common.BottomNavigationBar
+import com.thit.yawki.navigation.NavGraph
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+//    @Inject
+//    lateinit var composeNavigator: ComposeNavigator
+//    private val sharedViewModel: SharedViewModel by viewModels()
+//    @Inject
+//    lateinit var destroyMediaControllerUseCase: DestroyMediaControllerUseCase
+
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContent {
-            YawKiTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+            val navController = rememberNavController()
+            val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+            var bottomBarState by rememberSaveable { mutableStateOf(false) }
+            bottomBarState = when (currentRoute) {
+                Screen.HomeScreen.route -> true
+                Screen.FavoriteListScreen.route -> true
+                Screen.SettingScreen.route -> true
+                else -> false
+            }
+
+            Scaffold(bottomBar = {
+                AnimatedVisibility(visible = bottomBarState) {
+                    BottomNavigationBar(
+                        onItemClick = {
+                            navController.navigate(it) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
                     )
                 }
+            }) {
+                NavGraph(navController = navController)
             }
+
+//            LaunchedEffect(Unit) {
+//                composeNavigator.handleNavigationCommands(navController)
+//            }
+//            YawKiTheme {
+//                NavHost(
+//                    navController = navController,
+//                    startDestination = YawKiRoute.Dashboard.name
+//                ) {
+//                    dashboardNavigation(
+//                        sharedViewModel = sharedViewModel,
+//                        composeNavigator = composeNavigator
+//                    )
+//                }
+//            }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    YawKiTheme {
-        Greeting("Android")
+    override fun onDestroy() {
+        super.onDestroy()
+//        sharedViewModel.destroyMediaController()
+//        destroyMediaControllerUseCase.invoke()
+//        stopService(Intent(this, YawKiPlayerService::class.java))
     }
 }

@@ -21,4 +21,13 @@ dependencyResolutionManagement {
 
 rootProject.name = "YawKi"
 include(":app")
- 
+include(":core")
+include(":core:ui")
+include(":core:util")
+include(":feature")
+include(":feature:splash")
+include(":core:domain")
+include(":core:domain")
+include(":data")
+include(":feature:onboarding")
+include(":feature:auth")
