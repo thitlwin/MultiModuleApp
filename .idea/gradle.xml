@@ -33,6 +33,7 @@
             <option value="$PROJECT_DIR$/feature/auth" />
             <option value="$PROJECT_DIR$/feature/onboarding" />
             <option value="$PROJECT_DIR$/feature/signin" />
+            <option value="$PROJECT_DIR$/feature/signup" />
             <option value="$PROJECT_DIR$/feature/splash" />
           </set>
         </option>

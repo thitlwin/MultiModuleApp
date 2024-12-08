@@ -5,6 +5,11 @@ import com.thit.domain.repository.UserRepository
 import com.thit.domain.usecase.GetUserProfileImageUseCase
 import com.thit.domain.usecase.GetUserUseCase
 import com.thit.domain.usecase.UseCases
+import com.thit.signup.domain.repository.SignUpAuthenticationRepository
+import com.thit.signup.domain.repository.FirebaseStorageRepository
+import com.thit.signup.domain.usecase.SignUpUseCases
+import com.thit.signup.domain.usecase.authentication.SignUpWithEmailAndPasswordUseCase
+import com.thit.signup.domain.usecase.user.SaveUserUseCase
 import com.thit.splash.repository.SplashAuthRepository
 import com.thit.splash.domain.usecase.IsSignedInUseCase
 import com.thit.splash.domain.usecase.ReadOnBoardingStateUseCase
@@ -18,22 +23,22 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object UseCaseModule {
-//    @Singleton
-//    @Provides
-//    fun provideSignUpUseCases(
-//        authenticationRepository: AuthenticationRepository,
-//        firebaseStorageRepository: FirebaseStorageRepository
-//    ): SignUpUseCases {
-//        return SignUpUseCases(
-//            signUpWithEmailAndPasswordUseCase = SignUpWithEmailAndPasswordUseCase(
-//                authRepository = authenticationRepository
-//            ),
-//            saveUserUseCase = SaveUserUseCase(
-//                firebaseStorageRepository = firebaseStorageRepository,
-//                authenticationRepository = authenticationRepository
-//            ),
-//        )
-//    }
+    @Singleton
+    @Provides
+    fun provideSignUpUseCases(
+        signUpAuthenticationRepository: SignUpAuthenticationRepository,
+        firebaseStorageRepository: FirebaseStorageRepository
+    ): SignUpUseCases {
+        return SignUpUseCases(
+            signUpWithEmailAndPasswordUseCase = SignUpWithEmailAndPasswordUseCase(
+                authRepository = signUpAuthenticationRepository
+            ),
+            saveUserUseCase = SaveUserUseCase(
+                firebaseStorageRepository = firebaseStorageRepository,
+                signUpAuthenticationRepository = signUpAuthenticationRepository
+            ),
+        )
+    }
 
     @Provides
     @Singleton
@@ -50,7 +55,7 @@ object UseCaseModule {
             )
         )
     }
-//
+
 //    @Provides
 //    @Singleton
 //    fun provideHomeUseCases(

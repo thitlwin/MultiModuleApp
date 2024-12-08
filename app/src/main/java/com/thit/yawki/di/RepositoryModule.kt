@@ -2,10 +2,15 @@ package com.thit.yawki.di
 
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.thit.data.repository.DataStoreRepositoryImpl
 import com.thit.domain.repository.DataStoreRepository
 import com.thit.signin.domain.repository.AuthenticationRepository
 import com.thit.signin.repository.AuthenticationRepositoryImpl
+import com.thit.signup.domain.repository.FirebaseStorageRepository
+import com.thit.signup.domain.repository.SignUpAuthenticationRepository
+import com.thit.signup.repository.FirebaseStorageRepositoryImpl
+import com.thit.signup.repository.SignUpAuthenticationRepositoryImpl
 import com.thit.splash.repository.SplashAuthRepository
 import com.thit.splash.repository.SplashAuthRepositoryImpl
 import dagger.Module
@@ -19,13 +24,13 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideSignInAuthenticationRepository(firebaseAuth: FirebaseAuth):  AuthenticationRepository {
-//        return com.kursatkumsuz.signin.data.repository.AuthenticationRepositoryImpl(
-//            firebaseAuth = firebaseAuth
-//        )
-//    }
+    @Provides
+    @Singleton
+    fun provideSignInAuthenticationRepository(firebaseAuth: FirebaseAuth):  AuthenticationRepository {
+        return AuthenticationRepositoryImpl(
+            firebaseAuth = firebaseAuth
+        )
+    }
 
     @Provides
     @Singleton
@@ -41,8 +46,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideAuthenticationRepository(firebaseAuth: FirebaseAuth): AuthenticationRepository {
-        return AuthenticationRepositoryImpl(firebaseAuth = firebaseAuth)
+    fun provideSignUpAuthenticationRepository(firebaseAuth: FirebaseAuth): SignUpAuthenticationRepository {
+        return SignUpAuthenticationRepositoryImpl(firebaseAuth = firebaseAuth)
     }
 
 //    @Provides
@@ -95,15 +100,15 @@ object RepositoryModule {
 //        return com.kursatkumsuz.search.data.repository.SearchRepositoryImpl(searchApiService = searchApiService)
 //    }
 //
-//    @Provides
-//    @Singleton
-//    fun provideFirebaseStorageRepository(
-//        firebaseFirestore: FirebaseFirestore,
-//    ): FirebaseStorageRepository {
-//        return FirebaseStorageRepositoryImpl(
-//            firebaseFirestore = firebaseFirestore,
-//        )
-//    }
+    @Provides
+    @Singleton
+    fun provideFirebaseStorageRepository(
+    firebaseFirestore: FirebaseFirestore,
+    ): FirebaseStorageRepository {
+        return FirebaseStorageRepositoryImpl(
+            firebaseFirestore = firebaseFirestore,
+        )
+    }
 //
 //    @Provides
 //    @Singleton

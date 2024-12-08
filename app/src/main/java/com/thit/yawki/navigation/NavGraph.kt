@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import com.thit.auth.navigation.authenticationScreen
 import com.thit.onboarding.presentation.navigation.onBoardingScreen
 import com.thit.signin.presentation.navigation.signInScreen
+import com.thit.signup.presentation.navigation.signUpScreen
 import com.thit.splash.presentation.navigation.splashScreen
 import com.thit.util.Screen
 
@@ -19,5 +20,6 @@ fun NavGraph(navController: NavHostController) {
         onBoardingScreen(navController = navController)
         authenticationScreen(navController = navController)
         signInScreen(navController = navController)
+        signUpScreen(navController = navController)
     }
 }
