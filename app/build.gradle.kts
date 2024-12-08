@@ -53,6 +53,8 @@ dependencies {
     implementation(project(":feature:auth"))
     implementation(project(":feature:signin"))
     implementation(project(":feature:signup"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:profile"))
 
 //    Compose
     implementation(libs.androidx.core.ktx)
@@ -70,13 +72,13 @@ dependencies {
 
 //    Hilt
     implementation(libs.hilt.android)
-    implementation(project(":feature:home"))
     kapt(libs.hilt.android.compiler)
 
 //    Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     implementation(libs.google.firebase.firestore.ktx)
+    implementation(libs.firebase.storage.ktx)
 
     //    Retrofit
     implementation(libs.retrofit)

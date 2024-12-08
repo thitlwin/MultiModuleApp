@@ -1,12 +1,14 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    //    Hilt
+    alias(libs.plugins.hilt.android.gradle)
+    kotlin("kapt")
 }
 
 android {
-    namespace = "com.thit.util"
+    namespace = "com.thit.profile"
     compileSdk = ProjectProperties.COMPILE_SDK
 
     defaultConfig {
@@ -35,10 +37,34 @@ android {
 }
 
 dependencies {
+//    Features
+    implementation(project(":data"))
+    implementation(project(":data"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:util"))
 
+// Default
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-//    implementation(libs.material)
+    implementation(libs.material3)
+    implementation(libs.ui)
+    implementation(libs.androidx.ui.tooling.preview)
+
+    //    Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.hilt.android.compiler)
+
+    //    Coil
+    implementation(libs.coil.compose)
+
+    //    Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.storage.ktx)
+
+//    Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

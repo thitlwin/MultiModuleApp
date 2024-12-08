@@ -3,6 +3,7 @@ package com.thit.yawki.di
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.thit.data.repository.DataStoreRepositoryImpl
 import com.thit.data.repository.UserRepositoryImpl
 import com.thit.domain.repository.DataStoreRepository
@@ -10,6 +11,10 @@ import com.thit.domain.repository.UserRepository
 import com.thit.home.data.remote.ApiService
 import com.thit.home.data.repository.MovieRepositoryImpl
 import com.thit.home.domain.repository.MovieRepository
+import com.thit.profile.domain.repository.ImageRepository
+import com.thit.profile.domain.repository.ProfileAuthenticationRepository
+import com.thit.profile.repository.ImageRepositoryImpl
+import com.thit.profile.repository.ProfileAuthenticationRepositoryImpl
 import com.thit.signin.domain.repository.AuthenticationRepository
 import com.thit.signin.repository.AuthenticationRepositoryImpl
 import com.thit.signup.domain.repository.FirebaseStorageRepository
@@ -55,26 +60,26 @@ object RepositoryModule {
         return SignUpAuthenticationRepositoryImpl(firebaseAuth = firebaseAuth)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideProfileAuthenticationRepository(firebaseAuth: FirebaseAuth): ProfileAuthenticationRepository {
-//        return ProfileAuthenticationRepositoryImpl(firebaseAuth = firebaseAuth)
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun provideImageRepository(
-//        firebaseAuth: FirebaseAuth,
-//        firebaseFirestore: FirebaseFirestore,
-//        firebaseStorage: FirebaseStorage
-//    ): ImageRepository {
-//        return ImageRepositoryImpl(
-//            firebaseAuth = firebaseAuth,
-//            firebaseFirestore = firebaseFirestore,
-//            firebaseStorage = firebaseStorage
-//        )
-//    }
-//
+    @Provides
+    @Singleton
+    fun provideProfileAuthenticationRepository(firebaseAuth: FirebaseAuth): ProfileAuthenticationRepository {
+        return ProfileAuthenticationRepositoryImpl(firebaseAuth = firebaseAuth)
+    }
+
+    @Provides
+    @Singleton
+    fun provideImageRepository(
+        firebaseAuth: FirebaseAuth,
+        firebaseFirestore: FirebaseFirestore,
+        firebaseStorage: FirebaseStorage
+    ): ImageRepository {
+        return ImageRepositoryImpl(
+            firebaseAuth = firebaseAuth,
+            firebaseFirestore = firebaseFirestore,
+            firebaseStorage = firebaseStorage
+        )
+    }
+
     @Provides
     @Singleton
     fun provideMovieRepository(apiService: ApiService): MovieRepository {

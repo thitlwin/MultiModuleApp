@@ -10,6 +10,12 @@ import com.thit.home.domain.usecase.GetNowPlayingMovieUseCase
 import com.thit.home.domain.usecase.GetPopularMovieUseCase
 import com.thit.home.domain.usecase.GetTopRatedMovieUseCase
 import com.thit.home.domain.usecase.HomeUseCases
+import com.thit.profile.domain.repository.ImageRepository
+import com.thit.profile.domain.repository.ProfileAuthenticationRepository
+import com.thit.profile.domain.usecase.ProfileUseCases
+import com.thit.profile.domain.usecase.SaveUserProfileImageUseCase
+import com.thit.profile.domain.usecase.SignOutUseCase
+import com.thit.profile.domain.usecase.UploadProfileImageUseCase
 import com.thit.signup.domain.repository.SignUpAuthenticationRepository
 import com.thit.signup.domain.repository.FirebaseStorageRepository
 import com.thit.signup.domain.usecase.SignUpUseCases
@@ -96,25 +102,25 @@ object UseCaseModule {
 //        )
 //    }
 //
-//    @Provides
-//    @Singleton
-//    fun provideProfileUseCases(
-//        imageRepository: ImageRepository,
-//        profileAuthenticationRepository: ProfileAuthenticationRepository
-//    ): com.kursatkumsuz.profile.domain.usecase.ProfileUseCases {
-//        return com.kursatkumsuz.profile.domain.usecase.ProfileUseCases(
-//            uploadProfileImageUseCase = com.kursatkumsuz.profile.domain.usecase.UploadProfileImageUseCase(
-//                imageRepository = imageRepository
-//            ),
-//            saveUserProfileImageUseCase = com.kursatkumsuz.profile.domain.usecase.SaveUserProfileImageUseCase(
-//                imageRepository = imageRepository
-//            ),
-//            signOutUseCase = com.kursatkumsuz.profile.domain.usecase.SignOutUseCase(
-//                authenticationRepository = profileAuthenticationRepository
-//            )
-//        )
-//    }
-//
+    @Provides
+    @Singleton
+    fun provideProfileUseCases(
+    imageRepository: ImageRepository,
+    profileAuthenticationRepository: ProfileAuthenticationRepository
+    ): ProfileUseCases {
+        return ProfileUseCases(
+            uploadProfileImageUseCase = UploadProfileImageUseCase(
+                imageRepository = imageRepository
+            ),
+            saveUserProfileImageUseCase = SaveUserProfileImageUseCase(
+                imageRepository = imageRepository
+            ),
+            signOutUseCase = SignOutUseCase(
+                authenticationRepository = profileAuthenticationRepository
+            )
+        )
+    }
+
 //    @Singleton
 //    @Provides
 //    fun provideWatchListUseCases(watchListRepository: WatchListRepository): WatchListUseCases {
