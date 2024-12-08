@@ -51,6 +51,7 @@ dependencies {
     implementation(project(":feature:splash"))
     implementation(project(":feature:onboarding"))
     implementation(project(":feature:auth"))
+    implementation(project(":feature:signin"))
 
 //    Compose
     implementation(libs.androidx.core.ktx)

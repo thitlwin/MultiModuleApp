@@ -1,4 +1,4 @@
-package com.thit.splash.usecase
+package com.thit.splash.domain.usecase
 
 import com.thit.domain.repository.DataStoreRepository
 

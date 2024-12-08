@@ -2,13 +2,10 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    //    Hilt
-    alias(libs.plugins.hilt.android.gradle)
-    kotlin("kapt")
 }
 
 android {
-    namespace = "com.thit.splash"
+    namespace = "com.thit.component"
     compileSdk = ProjectProperties.COMPILE_SDK
 
     defaultConfig {
@@ -34,39 +31,17 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = ProjectProperties.kotlinCompilerExtensionVersion
-    }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-//Default
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material3)
     implementation(libs.ui)
     implementation(libs.androidx.ui.tooling.preview)
 
-//    Firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.auth.ktx)
-    //    Hilt
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    kapt(libs.hilt.android.compiler)
-//  Features
-    implementation(project(":core:util"))
-    implementation(project(":core:domain"))
-
-//    Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-
-kapt {
-    correctErrorTypes = true
 }

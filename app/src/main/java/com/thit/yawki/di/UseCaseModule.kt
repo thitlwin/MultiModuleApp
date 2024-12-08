@@ -6,9 +6,9 @@ import com.thit.domain.usecase.GetUserProfileImageUseCase
 import com.thit.domain.usecase.GetUserUseCase
 import com.thit.domain.usecase.UseCases
 import com.thit.splash.repository.SplashAuthRepository
-import com.thit.splash.usecase.IsSignedInUseCase
-import com.thit.splash.usecase.ReadOnBoardingStateUseCase
-import com.thit.splash.usecase.SplashUseCases
+import com.thit.splash.domain.usecase.IsSignedInUseCase
+import com.thit.splash.domain.usecase.ReadOnBoardingStateUseCase
+import com.thit.splash.domain.usecase.SplashUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

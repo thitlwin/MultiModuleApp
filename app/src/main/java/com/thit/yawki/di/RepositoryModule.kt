@@ -4,6 +4,8 @@ import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.thit.data.repository.DataStoreRepositoryImpl
 import com.thit.domain.repository.DataStoreRepository
+import com.thit.signin.domain.repository.AuthenticationRepository
+import com.thit.signin.repository.AuthenticationRepositoryImpl
 import com.thit.splash.repository.SplashAuthRepository
 import com.thit.splash.repository.SplashAuthRepositoryImpl
 import dagger.Module
@@ -37,12 +39,12 @@ object RepositoryModule {
         return DataStoreRepositoryImpl(context = context)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideAuthenticationRepository(firebaseAuth: FirebaseAuth):  AuthenticationRepository {
-//        return AuthenticationRepositoryImpl(firebaseAuth = firebaseAuth)
-//    }
-//
+    @Provides
+    @Singleton
+    fun provideAuthenticationRepository(firebaseAuth: FirebaseAuth): AuthenticationRepository {
+        return AuthenticationRepositoryImpl(firebaseAuth = firebaseAuth)
+    }
+
 //    @Provides
 //    @Singleton
 //    fun provideProfileAuthenticationRepository(firebaseAuth: FirebaseAuth): ProfileAuthenticationRepository {

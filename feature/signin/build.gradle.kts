@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.thit.splash"
+    namespace = "com.thit.signin"
     compileSdk = ProjectProperties.COMPILE_SDK
 
     defaultConfig {
@@ -34,32 +34,26 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = ProjectProperties.kotlinCompilerExtensionVersion
-    }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-//Default
+//    Features
+    implementation(project(":core:util"))
+
+// Default
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material3)
     implementation(libs.ui)
     implementation(libs.androidx.ui.tooling.preview)
-
-//    Firebase
+    //    Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     //    Hilt
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(project(":core:component"))
     kapt(libs.hilt.android.compiler)
-//  Features
-    implementation(project(":core:util"))
-    implementation(project(":core:domain"))
 
 //    Test
     testImplementation(libs.junit)

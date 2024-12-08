@@ -3,7 +3,7 @@ package com.thit.splash.presentation
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.thit.splash.usecase.SplashUseCases
+import com.thit.splash.domain.usecase.SplashUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch

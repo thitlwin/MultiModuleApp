@@ -1,4 +1,4 @@
-package com.thit.onboarding.usecase
+package com.thit.onboarding.domain.usecase
 
 import com.thit.domain.repository.DataStoreRepository
 import javax.inject.Inject
